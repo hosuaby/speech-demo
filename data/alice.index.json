@@ -1,0 +1,40 @@
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "char_filter": {
+          "removeNonText": {
+            "type": "pattern_replace",
+            "pattern": "[\\W&&\\S]",
+            "replacement": ""
+          }
+        },
+        "filter": {
+          "phonetic": {
+            "type": "phonetic",
+            "encoder": "metaphone",
+            "replace": false
+          }
+        },
+        "analyzer": {
+          "paragraph": {
+            "char_filter": [ "removeNonText" ],
+            "tokenizer": "standard",
+            "filter": [
+              "lowercase",
+              "phonetic"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "text": {
+        "type": "text",
+        "analyzer": "paragraph"
+      }
+    }
+  }
+}
